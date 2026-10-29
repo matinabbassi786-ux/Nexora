@@ -39,10 +39,40 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
     # REST_FRAMEWORK for API development
     "rest_framework",
+    
     # Django Debug Toolbar
     "debug_toolbar",
+    
+    # folder apps is AI and ML code 
+    "AI",
+    
+    # folder apps is for user authentication and authorization based on Django's built-in User model teacher and student information database and index page for the website coin and other related functions
+    "Home",
+    
+    # Teacher Folder apps is for teacher information and management of the website and other related functions  
+    "Teacher",
+    
+    # Student Folder apps is for student information and management of the website and other related functions
+    "Student",
+    
+    # Schedule folser app Schedule and background task management of the website and other related functions
+    "Schedule",
+    
+    #  Examination folder app exam , test and results management of the website and other related functions
+    "Examination",
+
+    # Administrator folder app for administrator information and management of the website and other related functions 
+    "Administrator",
+
+    # API folder app for API development and management of the website and other related functions 
+    "API",
+    #  Education folder app management  Education system and other related functions
+    "Education",
+
+
 
 ]
 
