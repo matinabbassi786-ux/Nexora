@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/6.1/ref/settings/
 
 from pathlib import Path
 
+import os
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -54,7 +56,9 @@ ROOT_URLCONF = 'Nexora.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates')
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -114,7 +118,20 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.1/howto/static-files/
 
+# 1. The URL path used to access static files in the browser
 STATIC_URL = 'static/'
+
+# 2. Additional directories where Django looks for static files (e.g., project-wide assets)
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+]
+
+# 3. The absolute path to the directory where collected static files will be gathered for production
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+MEDIA_ROOT = BASE_DIR / 'media'
+
+MEDIA_URL = '/media/'
 
 
 # Email
