@@ -39,6 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # REST_FRAMEWORK for API development
+    "rest_framework",
+    # Django Debug Toolbar
+    "debug_toolbar",
+
 ]
 
 MIDDLEWARE = [
@@ -49,6 +54,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    #  debug_toolbar 
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
+
 ]
 
 ROOT_URLCONF = 'Nexora.urls'
@@ -142,3 +150,21 @@ MAILERS = {
         'BACKEND': 'django.core.mail.backends.console.EmailBackend',
     },
 }
+
+
+# REST_FRAMEWORK only   (authenticated users can access )
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication', # Or JWT, depending on your setup
+    ],
+}
+
+#  debug_toolbar
+INTERNAL_IPS = [
+    "127.0.0.1",
+    "localhost",
+]
