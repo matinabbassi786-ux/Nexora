@@ -44,5 +44,12 @@ class UserInfo(models.Model):
     
     slug = AutoSlugField(populate_from='user_Name', unique=True, always_update=True)
 
+    Vital = models.TextField()
+
+    Ip = models.TextField()    
+
+    Previous_Path = models.TextField(blank=True, null=True)
+
+
     def __str__(self):
         return self.User_Name
