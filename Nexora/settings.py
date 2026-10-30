@@ -40,8 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-
+    # django-import-export · PyPI is a popular Django library used to import and export data between your database and multiple file formats (such as CSV, Excel/XLSX, JSON, YAML, and HTML).
+    'import_export',
     
     # REST_FRAMEWORK for API development
     "rest_framework",
