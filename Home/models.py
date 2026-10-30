@@ -22,9 +22,7 @@ class UserInfo(models.Model):
     
     User_Email = models.TextField()
     
-    User_Father_Name = models.TextField(blank=True,null=True)
     
-    User_Mother_Name = models.TextField(blank=True,null=True)
     
     User_Bio = models.TextField(blank=True,null=True)
     
@@ -40,7 +38,7 @@ class UserInfo(models.Model):
     
     First_Activity = models.DateTimeField(blank=True, null=True)
     
-    User_Phone = models.ImageField(upload_to='user_photos/', blank=True, null=True)
+
     
     slug = AutoSlugField(populate_from='User_Name', unique=True, always_update=True)
 
