@@ -11,19 +11,38 @@ class UserInfo(models.Model):
         ('F', 'Female'),
         ('O', 'Other')
     )
+    
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    
     User_Name = models.TextField()
+    
     First_Name = models.TextField()
+    
     Last_Name = models.TextField()
+    
     User_Email = models.TextField()
+    
     User_Father_Name = models.TextField(blank=True,null=True)
+    
     User_Mother_Name = models.TextField(blank=True,null=True)
+    
     User_Bio = models.TextField(blank=True,null=True)
+    
     User_OTP  = models.CharField(max_length=6,blank=True,null=True)
+    
     User_Gender = models.CharField(max_length=1, choices=Gender_Choices)
+    
     Is_Verified = models.BooleanField(default=False)
+    
     User_Birth_Date = models.TextField()
+    
     Last_Activity = models.DateTimeField(blank=True, null=True)
+    
     First_Activity = models.DateTimeField(blank=True, null=True)
+    
     User_Phone = models.ImageField(upload_to='user_photos/', blank=True, null=True)
+    
     slug = AutoSlugField(populate_from='user_Name', unique=True, always_update=True)
+
+    def __str__(self):
+        return self.User_Name
