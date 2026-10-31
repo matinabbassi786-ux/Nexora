@@ -8,9 +8,12 @@ from django.urls import path,include
 
 
 from django.http import HttpResponse
+from django.views.decorators.http import require_GET
 
 from django.core import mail
+from .tasks import send_notification
 
+@require_GET
 def views(request):
     backend = mail.mailers["default"]
     email = mail.EmailMessage(
@@ -21,10 +24,16 @@ def views(request):
         connection=backend,
     )
 
+    task = send_notification.delay(
+        101,
+        "Hello0000000000000000 from Nexora!"
+    )
+
+
 
     
 
-    return HttpResponse(f"Pass")
+    return HttpResponse(f"Pass  {task.id}")
 
 
 

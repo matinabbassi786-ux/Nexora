@@ -38,8 +38,6 @@ class UserInfo(models.Model):
     
     First_Activity = models.DateTimeField(auto_now_add=True)
     
-
-    
     slug = AutoSlugField(populate_from='User_Name', unique=True, always_update=True)
 
     Vital = models.TextField()

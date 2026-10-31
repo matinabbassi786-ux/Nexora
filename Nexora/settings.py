@@ -40,6 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #  background tasks and schedule 
+       "django_celery_beat",
+           "django_tasks_redis",
+
     # django-import-export · PyPI is a popular Django library used to import and export data between your database and multiple file formats (such as CSV, Excel/XLSX, JSON, YAML, and HTML).
     'import_export',
     
@@ -263,3 +267,86 @@ DEBUG_TOOLBAR_PANELS = [
     "debug_toolbar.panels.logging.LoggingPanel",
     # "debug_toolbar.panels.redirects.RedirectsPanel",  <-- Comment out or remove this line
 ]
+
+# ======================================
+# CELERY CONFIGURATION
+# ======================================
+
+# Redis / Valkey broker
+CELERY_BROKER_URL = "redis://127.0.0.1:6379/0"
+
+# Task result storage
+CELERY_RESULT_BACKEND = "redis://127.0.0.1:6379/1"
+
+# Timezone
+CELERY_TIMEZONE = "Asia/Kolkata"
+
+CELERY_ENABLE_UTC = True
+
+# Task serialization
+CELERY_TASK_SERIALIZER = "json"
+
+CELERY_RESULT_SERIALIZER = "json"
+
+CELERY_ACCEPT_CONTENT = ["json"]
+
+# Task execution
+CELERY_TASK_TRACK_STARTED = True
+
+CELERY_TASK_TIME_LIMIT = 300
+
+CELERY_TASK_SOFT_TIME_LIMIT = 240
+
+# Scheduled task database
+CELERY_BEAT_SCHEDULER = (
+    "django_celery_beat.schedulers:DatabaseScheduler"
+)
+
+# ==========================================
+# CELERY TASK CONFIGURATION
+# ==========================================
+
+# Message broker
+CELERY_BROKER_URL = "redis://127.0.0.1:6379/0"
+
+# Task result backend
+CELERY_RESULT_BACKEND = "redis://127.0.0.1:6379/1"
+
+# Timezone
+CELERY_TIMEZONE = "Asia/Kolkata"
+CELERY_ENABLE_UTC = True
+
+# Serialization
+CELERY_TASK_SERIALIZER = "json"
+CELERY_RESULT_SERIALIZER = "json"
+CELERY_ACCEPT_CONTENT = ["json"]
+
+# Execution
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 300
+CELERY_TASK_SOFT_TIME_LIMIT = 240
+
+# ==========================================
+# CELERY SCHEDULE CONFIGURATION
+# ==========================================
+
+CELERY_BEAT_SCHEDULER = (
+    "django_celery_beat.schedulers:DatabaseScheduler"
+)
+
+# ==========================================
+# DJANGO CACHE CONFIGURATION
+# ==========================================
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_valkey.cache.ValkeyCache",
+        "LOCATION": "valkey://127.0.0.1:6379/2",
+        "OPTIONS": {
+            "SOCKET_CONNECT_TIMEOUT": 5,
+            "SOCKET_TIMEOUT": 5,
+        },
+        "TIMEOUT": 300,
+        "KEY_PREFIX": "NEXORA",
+    }
+}
