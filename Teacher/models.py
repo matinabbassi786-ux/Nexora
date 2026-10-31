@@ -66,6 +66,8 @@ class Teacher(models.Model):
 
     Leaving_Of_Joining = models.DateField(blank=True,null=True)
 
+    Leaving = models.BooleanField(default=False)
+
 
 class Teacher_documents(models.Model):
     Teachers = models.OneToOneField(Teacher,on_delete=models.CASCADE)
