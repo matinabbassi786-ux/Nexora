@@ -68,6 +68,10 @@ class Teacher(models.Model):
 
     Leaving = models.BooleanField(default=False)
 
+    Code = models.TextField()
+
+
+
 
 class Teacher_documents(models.Model):
     Teachers = models.OneToOneField(Teacher,on_delete=models.CASCADE)
