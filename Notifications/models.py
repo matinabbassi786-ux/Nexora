@@ -14,3 +14,5 @@ class Notifications(models.Model):
     Read = models.BooleanField(default=False)
     created_data = models.DateField(auto_now_add=True)
     Read_data = models.DateField(auto_now_add=True)
+
+

@@ -64,6 +64,7 @@ class Course(models.Model):
 
     Coin = models.PositiveIntegerField()
     Offer = models.PositiveSmallIntegerField(validators=[MinValueValidator(1),MaxValueValidator(100)],blank=True)
+    
     Buyer_Student = models.ManyToManyField(Student_Info,related_name="Buyer_Student")
     
     Visitor_Total = models.PositiveBigIntegerField(default=0)
@@ -81,12 +82,13 @@ class Course(models.Model):
 
     
     img = models.FileField(upload_to="Course/img/")
+    
     video = models.FileField(upload_to="Course/",blank=True,null=True)
 
     Crete_date = models.DateTimeField(auto_now_add=True)
     Last_date = models.DateTimeField(auto_now=True)
 
-    pdf = models.FileField(upload_to="Course/pdf/")
+    pdf = models.FileField(upload_to="Course/pdf/",max_length=200)
 
     Code = models.TextField()
 
