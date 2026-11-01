@@ -80,8 +80,5 @@ class User_Status(models.Model):
     User_Activity_Status = models.CharField(choices=User_Activity_Status_Choices,max_length=75,default="???")
 
 
-class History(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    path = models.CharField(max_length=100)
-    date = models.DateTimeField(auto_now_add=True)
+
 
