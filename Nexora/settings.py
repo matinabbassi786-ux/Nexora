@@ -28,7 +28,9 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG")
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost','127.0.0.1'
+]
 
 
 # Application definition
@@ -76,16 +78,22 @@ INSTALLED_APPS = [
 
     # API folder app for API development and management of the website and other related functions 
     "API",
+  
     #  Education folder app management  Education system and other related functions
     "Education",
+  
     # Classroom folder app management live video , live audio , live chat and other related functions
     "Classroom",
+  
     # Communication folder app manafement Communication bewteen teacher and student and other related functions
     "Communication",
+  
     # Attendance folder app management Attendance and other related functions
     "Attendance",
+  
     #  Notifications folder app Notifications managemnt and other related functions
     "Notifications",
+  
     # Reporting  folder app management Reporting techer and student and other related functions
     "Reporting",
 
@@ -350,3 +358,4 @@ CACHES = {
         "KEY_PREFIX": "NEXORA",
     }
 }
+
