@@ -10,22 +10,36 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.1/ref/settings/
 """
 
+import os
+import environ 
 from pathlib import Path
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+env = environ.Env(
+    DEBUG=(bool, True)
+)
+
+# Load environment variables from project root
+environ.Env.read_env(BASE_DIR / ".env")
+
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-1hq)3a9h(_+n+mdfy&h8-$r#ud901t5_p4188wp@!6a4tpax*7'
+SECRET_KEY = env("SECRET_KEY")
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG =  env("DEBUG")
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "127.0.0.1"
+]
 
 
 # Application definition
@@ -38,9 +52,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
      "django_celery_beat",
+     "debug_toolbar",
 
     # folder apps is AI and ML code
-    "AI",
+    # "AI",
 
     # folder apps is for user authentication and authorization based on Django's built-in User model teacher and student information database and index page for the website coin and other related functions
     "Home",
@@ -52,33 +67,39 @@ INSTALLED_APPS = [
     "Student",
 
     # Schedule folser app Schedule and background task management of the website and other related functions
-    "Schedule",
+    # "Schedule",
 
     #  Examination folder app exam , test and results management of the website and other related functions
-    "Examination",
+    # "Examination",
 
     # Administrator folder app for administrator information and management of the website and other related functions
-    "Administrator",
+    # "Administrator",
 
     # API folder app for API development and management of the website and other related functions
-    "API",
+    # "API",
+    
     #  Education folder app management  Education system and other related functions
     "Education",
+    
     # Classroom folder app management live video , live audio , live chat and other related functions
-    "Classroom",
+    # "Classroom",
+    
     # Communication folder app manafement Communication bewteen teacher and student and other related functions
-    "Communication",
+    # "Communication",
+    
     # Attendance folder app management Attendance and other related functions
-    "Attendance",
+    # "Attendance",
+    
     #  Notifications folder app Notifications managemnt and other related functions
-    "Notifications",
+    # "Notifications",
+    
     # Reporting  folder app management Reporting techer and student and other related functions
-    "Reporting",
+    # "Reporting",
 
     # DocumentManagement Management student and teacher document and other related functions
-    "DocumentManagement",
+    # "DocumentManagement",
     # Rewards folder app management trophies and other related functions
-    "Rewards",
+    # "Rewards",
 ]
 
 MIDDLEWARE = [
@@ -89,6 +110,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+      "debug_toolbar.middleware.DebugToolbarMiddleware",
+
 ]
 
 ROOT_URLCONF = 'Nexora.urls'
@@ -158,6 +181,21 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+# 2. Additional absolute paths where Django will look for global static files
+STATICFILES_DIRS = [
+    BASE_DIR / "static",  # Points to a global 'static' folder at your project root
+]
+
+# 3. The absolute path to the directory where collectstatic will collect files for production
+# DO NOT put your development static files here; this should be an empty directory.
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
+# Absolute filesystem path to the directory that will hold user-uploaded files
+MEDIA_ROOT = BASE_DIR / 'media'
+
+# URL that handles the media served from MEDIA_ROOT
+MEDIA_URL = '/media/'
+
 
 # Email
 # https://docs.djangoproject.com/en/6.1/topics/email/#topic-email-configuration
@@ -201,3 +239,33 @@ CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'UTC'  # Match your Django TIME_ZONE
 CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+    "localhost",
+]
+
+DEBUG_TOOLBAR_PANELS = [
+    'debug_toolbar.panels.history.HistoryPanel',
+    'debug_toolbar.panels.versions.VersionsPanel',
+    'debug_toolbar.panels.timer.TimerPanel',
+    'debug_toolbar.panels.settings.SettingsPanel',
+    'debug_toolbar.panels.headers.HeadersPanel',
+    'debug_toolbar.panels.request.RequestPanel',
+    'debug_toolbar.panels.sql.SQLPanel',
+    'debug_toolbar.panels.staticfiles.StaticFilesPanel',
+    'debug_toolbar.panels.templates.TemplatesPanel',
+    'debug_toolbar.panels.alerts.AlertsPanel',
+    'debug_toolbar.panels.signals.SignalsPanel',
+    # 'debug_toolbar.panels.redirects.RedirectsPanel',  # <-- Remove this line
+    'debug_toolbar.panels.staticfiles.StaticFilesPanel',
+    'debug_toolbar.panels.cache.CachePanel',
+    'debug_toolbar.panels.signals.SignalsPanel',
+    'debug_toolbar.panels.logging.LoggingPanel',
+    # 'debug_toolbar.panels.redirects.RedirectsPanel',
+]
+
+
+
+SESSION_COOKIE_AGE = 30 * 24 * 60 * 60  # 30 days in seconds (2592000)
+SESSION_SAVE_EVERY_REQUEST = True  # Refresh session expiry on each request if desired
