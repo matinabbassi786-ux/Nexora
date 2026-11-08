@@ -1,0 +1,1 @@
+celery -A Nexora worker --loglevel=info
