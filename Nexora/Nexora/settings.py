@@ -58,7 +58,7 @@ INSTALLED_APPS = [
     # "AI",
 
     # folder apps is for user authentication and authorization based on Django's built-in User model teacher and student information database and index page for the website coin and other related functions
-    # "Home",
+    "Home",
 
     # Teacher Folder apps is for teacher information and management of the website and other related functions
     "Teacher",
@@ -79,7 +79,7 @@ INSTALLED_APPS = [
     # "API",
     
     #  Education folder app management  Education system and other related functions
-    # "Education",
+    "Education",
     
     # Classroom folder app management live video , live audio , live chat and other related functions
     # "Classroom",
