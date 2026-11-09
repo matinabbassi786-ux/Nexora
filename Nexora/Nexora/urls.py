@@ -37,7 +37,8 @@ def test(request):
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", test, name="test"),
+    # path("", test, name="test"),
+    path("",include("API.urls")),
 
    
 ]
