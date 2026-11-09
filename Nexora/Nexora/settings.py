@@ -41,7 +41,7 @@ ALLOWED_HOSTS = [
     "127.0.0.1"
 ]
 
-c
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -53,6 +53,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
      "django_celery_beat",
      "debug_toolbar",
+
+      "rest_framework",
 
      "Bank",
 
@@ -143,10 +145,13 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    },
+
 }
 
-
+DATABASE_ROUTERS = [
+    "Nexora.routers.AppDatabaseRouter",
+]
 # Password validation
 # https://docs.djangoproject.com/en/6.1/ref/settings/#auth-password-validators
 
