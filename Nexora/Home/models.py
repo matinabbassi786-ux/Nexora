@@ -13,7 +13,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 # ============================================================
 
 class User_History(models.Model):
-    User = models.ForeignKey(User,on_delete=models.Model)
+    Users = models.ForeignKey(User,on_delete=models.CASCADE)
     Ip = models.CharField(max_length=255)
     Browser = models.TextField()
     Operating_system = models.TextField()
@@ -60,7 +60,7 @@ class User_privity(models.Model):
         ('Pending Deletion',"Pending Deletion"),
         ('Archived',"Archived"),
     )
-    User = models.OneToOneField(User,on_delete=models.Model)
+    Users = models.OneToOneField(User,on_delete=models.CASCADE)
     Otp = models.CharField(max_length=255,blank=True,null=True)
     is_valid = models.BooleanField(default=True)
     Bio = models.TextField()
@@ -81,7 +81,7 @@ class User_privity(models.Model):
 # ============================================================
 
 class User_Online(models.Model):
-    User = models.ForeignKey(User,on_delete=models.Model)  
+    Users = models.ForeignKey(User,on_delete=models.CASCADE)  
     Online = models.BooleanField(default=True)  
     date = models.DateTimeField(auto_now_add=True)
 
@@ -94,69 +94,17 @@ class User_Online(models.Model):
 # ============================================================
 
 class User_Path(models.Model):
-    User = models.ForeignKey(User,on_delete=models.Model)  
+    Users = models.ForeignKey(User,on_delete=models.CASCADE)  
     path = models.TextField()
     date = models.DateTimeField(auto_now_add=True)
 
 
-# ============================================================
-# USER WALLET
-# Stores the current virtual currency balances of a user.
-# Each user has one wallet.
-# ============================================================
-
-class Wallet(models.Model):
-    User = models.OneToOneField(User,on_delete=models.Model)  
-    Coin = models.PositiveBigIntegerField(default=0)
-    ticket = models.PositiveBigIntegerField(default=0)
 
 
-# ============================================================
-# PAYMENT HISTORY
-# Stores coin and ticket transactions.
-# Maintains a record of credits and debits in the wallet.
-# ============================================================
-
-class Payment_History(models.Model):
-    bankings = (
-        ("Credit","Credit"),
-        ("Debit","Debit")
-    )
-    types =(
-        ("Coin","Coin"),
-        ("Ticket","Ticket"),
-    )
-    User = models.ForeignKey(User,on_delete=models.Model)  
-    money = models.CharField(choices=types,max_length=50)
-    banking = models.CharField(choices=bankings,max_length=50)
-    Title = models.CharField(max_length=255)
-    balance = models.BigIntegerField()
-    date = models.DateTimeField(auto_now_add=True)
 
 
-# ============================================================
-# COIN AND TICKET PRICING FOR STUDENTS
-# Stores the conversion or purchase prices of coins and
-# tickets applicable to students.
-# Each record can represent a historical price configuration.
-# ============================================================
-class Coin_ticket_Price_For_Student(models.Model):
-    Coin_money = models.FloatField()
-    ticket_money = models.FloatField()
-    date = models.DateTimeField(auto_now_add=True)
 
 
-# ============================================================
-# COIN AND TICKET PRICING FOR TEACHERS
-# Stores the conversion or purchase prices of coins and
-# tickets applicable to teachers.
-# Maintains separate teacher pricing history.
-# ============================================================
-
-class Coin_ticket_Price_For_Teacher(models.Model):
-    Coin_money = models.FloatField()
-    ticket_money = models.FloatField()
-    date = models.DateTimeField(auto_now_add=True)
 
 
 
@@ -186,7 +134,7 @@ class Shop(models.Model):
 # ============================================================
 
 class Honor(models.Model):
-    User = models.OneToOneField(User,on_delete=models.Model)
+    Users = models.OneToOneField(User,on_delete=models.CASCADE)
     Student = models.BooleanField(default=False)
     Teacher = models.BooleanField(default=False)
     Management = models.BooleanField(default=False)
@@ -200,7 +148,7 @@ class Honor(models.Model):
 # ============================================================
 
 class Honor_History(models.Model):
-    User = models.ForeignKey(User,on_delete=models.Model)
+    Users = models.ForeignKey(User,on_delete=models.CASCADE)
     Tite = models.CharField(max_length=255) 
     Honor = models.FloatField(validators=[MinValueValidator(-100.0),MaxValueValidator(100.0)],default=0)
     date = models.DateField(auto_now_add=True)
