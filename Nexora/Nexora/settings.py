@@ -54,6 +54,8 @@ INSTALLED_APPS = [
      "django_celery_beat",
      "debug_toolbar",
 
+     "Bank",
+
     # folder apps is AI and ML code
     # "AI",
 

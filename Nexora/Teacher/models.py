@@ -1,10 +1,29 @@
 from django.db import models
 from django.contrib.auth.models import User
+from Home.models import Subject,Industry,Field,Skill
+
+
+class Teacher(models.Model):
+    Teacher = models.OneToOneField(User,on_delete=models.CASCADE)
+    Leving = models.BooleanField(default=False)
+    Experience = models.CharField(max_length=250)
+    StudentsTaught = models.TextField()
+    Subjects = models.ManyToManyField(Subject)
+    Industrys = models.ManyToManyField(Industry)
+    Fields = models.ManyToManyField(Field)
+    Skills = models.ManyToManyField(Skill)
+    data = models.DateTimeField(auto_now_add=True)
+
+
 
 """
     Stores a teacher's educational qualifications, certificates,
     professional experience documents and verification status.
 """
+
+
+
+
 class Teacher_Educational_Qualifications(models.Model):
     Approval_Status_Opstion =(
         ("Pending","Pending"),
