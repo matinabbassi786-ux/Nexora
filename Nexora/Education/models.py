@@ -144,3 +144,4 @@ class Courses_Subjects_Topic_Honor_History(models.Model):
     Honor = models.FloatField(validators=[MinValueValidator(-100.0),MaxValueValidator(100.0)],default=0)
     date = models.DateField(auto_now_add=True)
 
+

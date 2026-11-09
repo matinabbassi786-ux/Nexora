@@ -4,13 +4,6 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 
-# ============================================================
-# USER HISTORY
-# Stores information about a user's browser, device, network,
-# location, and environment whenever they access the platform.
-# Useful for login history, security monitoring, and
-# suspicious activity detection.
-# ============================================================
 
 class User_History(models.Model):
     Users = models.ForeignKey(User,on_delete=models.CASCADE)
@@ -34,12 +27,6 @@ class User_History(models.Model):
     date = models.DateTimeField(auto_now_add=True)
 
 
-# ============================================================
-# USER PRIVACY AND ACCOUNT INFORMATION
-# Stores additional account information, user roles,
-# verification status, and account lifecycle information.
-# One record is associated with one Django User.
-# ============================================================
 
 class User_privity(models.Model):
     Genders = (
@@ -74,24 +61,11 @@ class User_privity(models.Model):
     Code = models.TextField()
 
 
-# ============================================================
-# USER ONLINE STATUS
-# Stores user online/offline status records.
-# Can be used to track user activity and online sessions.
-# ============================================================
-
 class User_Online(models.Model):
     Users = models.ForeignKey(User,on_delete=models.CASCADE)  
     Online = models.BooleanField(default=True)  
     date = models.DateTimeField(auto_now_add=True)
 
-
-
-# ============================================================
-# USER PATH HISTORY
-# Stores website paths or URLs visited by a user.
-# Useful for activity tracking and navigation analytics.
-# ============================================================
 
 class User_Path(models.Model):
     Users = models.ForeignKey(User,on_delete=models.CASCADE)  
@@ -101,18 +75,6 @@ class User_Path(models.Model):
 
 
 
-
-
-
-
-
-
-
-# ============================================================
-# SHOP
-# Stores products or packages available for purchase.
-# Products can be purchased using supported wallet currencies.
-# ============================================================
 class Shop(models.Model):
     types =(
         ("Coin","Coin"),
@@ -125,14 +87,6 @@ class Shop(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     
 
-
-# ============================================================
-# HONOR SYSTEM
-# Stores the current honor and reputation score of a user.
-# Each user has one Honor record.
-# Separate honor categories are maintained for different roles.
-# ============================================================
-
 class Honor(models.Model):
     Users = models.OneToOneField(User,on_delete=models.CASCADE)
     Student = models.BooleanField(default=False)
@@ -140,12 +94,7 @@ class Honor(models.Model):
     Management = models.BooleanField(default=False)
     Honor = models.FloatField(validators=[MinValueValidator(-100.0),MaxValueValidator(100.0)],default=0)
 
-# ============================================================
-# HONOR HISTORY
-# Stores historical honor changes for each user.
-# Every record represents an honor-related event or transaction.
-# Useful for tracking reputation changes and auditing user behavior.
-# ============================================================
+
 
 class Honor_History(models.Model):
     Users = models.ForeignKey(User,on_delete=models.CASCADE)
@@ -153,18 +102,6 @@ class Honor_History(models.Model):
     Honor = models.FloatField(validators=[MinValueValidator(-100.0),MaxValueValidator(100.0)],default=0)
     date = models.DateField(auto_now_add=True)
 
-
-
-# ============================================================
-# INDUSTRY
-# Represents a broad economic or professional industry.
-#
-# Examples:
-# Information Technology, Healthcare, Finance, Education.
-#
-# An industry can contain multiple fields and skills.
-# A field can also belong to multiple industries.
-# ============================================================
 
 class Industry(models.Model):
     Name = models.CharField(max_length=255, unique=True)
@@ -180,16 +117,6 @@ class Industry(models.Model):
     Created_At = models.DateTimeField(auto_now_add=True)
     Updated_At = models.DateTimeField(auto_now=True)
 
-# ============================================================
-# FIELD
-# Represents a specialized area within one or more industries.
-#
-# Examples:
-# Data Science, Software Development, Cybersecurity.
-#
-# A field can belong to multiple industries and contain
-# multiple subjects.
-# ============================================================
 
 class Field(models.Model):
     Name = models.CharField(max_length=255, unique=True)
@@ -210,17 +137,6 @@ class Field(models.Model):
 
     Created_At = models.DateTimeField(auto_now_add=True)
     Updated_At = models.DateTimeField(auto_now=True)
-
-# ============================================================
-# SUBJECT
-# Represents an academic or professional subject.
-#
-# Examples:
-# Mathematics, Programming, Machine Learning, Economics.
-#
-# A subject can belong to multiple fields and contain
-# multiple topics.
-# ============================================================
 
 
 class Subject(models.Model):
@@ -244,18 +160,6 @@ class Subject(models.Model):
     Updated_At = models.DateTimeField(auto_now=True)
 
 
-# ============================================================
-# TOPIC
-# Represents a specific knowledge area within a subject.
-#
-# Examples:
-# Subject: Machine Learning
-# Topics: Regression, Classification, Clustering.
-#
-# A topic can belong to multiple subjects and contain
-# multiple skills.
-# ============================================================
-
 class Topic(models.Model):
     Name = models.CharField(max_length=255, unique=True)
     Description = models.TextField(blank=True, null=True)
@@ -275,16 +179,7 @@ class Topic(models.Model):
     Created_At = models.DateTimeField(auto_now_add=True)
     Updated_At = models.DateTimeField(auto_now=True)
 
-# ============================================================
-# SKILL
-# Represents a practical ability or competency.
-#
-# Examples:
-# Python Programming, Data Cleaning, SQL, Data Visualization.
-#
-# A skill can be relevant to multiple industries, fields,
-# and topics.
-# ============================================================
+
 class Skill(models.Model):
     Name = models.CharField(max_length=255, unique=True)
     Description = models.TextField(blank=True, null=True)
@@ -311,14 +206,7 @@ class Skill(models.Model):
     Updated_At = models.DateTimeField(auto_now=True)
 
 
-# ============================================================
-# BASIC IDENTIFICATION DETAILS
-# Stores the personal identification and demographic
-# information of a user.
-#
-# Each user has one basic identification record.
-# Used for student, teacher, and other user verification.
-# ============================================================
+
 
 class Basic_Identification_Details(models.Model):
     Category_Op= (

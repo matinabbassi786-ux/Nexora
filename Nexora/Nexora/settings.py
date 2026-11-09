@@ -11,19 +11,19 @@ https://docs.djangoproject.com/en/6.1/ref/settings/
 """
 
 import os
-import environ 
+
 from pathlib import Path
+from dotenv import load_dotenv
+
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-env = environ.Env(
-    DEBUG=(bool, True)
-)
+load_dotenv(BASE_DIR / '.env')
 
-# Load environment variables from project root
-environ.Env.read_env(BASE_DIR / ".env")
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 
 
 
@@ -31,11 +31,11 @@ environ.Env.read_env(BASE_DIR / ".env")
 # See https://docs.djangoproject.com/en/6.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env("SECRET_KEY")
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG =  env("DEBUG")
+DEBUG =  os.getenv("DEBUG")
 
 ALLOWED_HOSTS = [
     "127.0.0.1"
@@ -78,7 +78,7 @@ INSTALLED_APPS = [
     # "Administrator",
 
     # API folder app for API development and management of the website and other related functions
-    # "API",
+    "API",
     
     #  Education folder app management  Education system and other related functions
     "Education",
@@ -87,13 +87,13 @@ INSTALLED_APPS = [
     # "Classroom",
     
     # Communication folder app manafement Communication bewteen teacher and student and other related functions
-    # "Communication",
+    "Communication",
     
     # Attendance folder app management Attendance and other related functions
     # "Attendance",
     
     #  Notifications folder app Notifications managemnt and other related functions
-    # "Notifications",
+    "Notifications",
     
     # Reporting  folder app management Reporting techer and student and other related functions
     # "Reporting",
@@ -202,12 +202,21 @@ MEDIA_URL = '/media/'
 # Email
 # https://docs.djangoproject.com/en/6.1/topics/email/#topic-email-configuration
 
+
 MAILERS = {
-    'default': {
-        'BACKEND': 'django.core.mail.backends.console.EmailBackend',
+    "default": {
+        "BACKEND": "django.core.mail.backends.smtp.EmailBackend",
+        "OPTIONS": {
+            "host": "smtp.gmail.com",
+            "port": 587,
+            "use_tls": True,
+            "username": EMAIL_HOST_USER,
+            "password": EMAIL_HOST_PASSWORD,
+        },
     },
 }
 
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 
 CACHES = {
