@@ -85,24 +85,23 @@ INSTALLED_APPS = [
     #  Education folder app management  Education system and other related functions
     "Education",
     
-    # Classroom folder app management live video , live audio , live chat and other related functions
+
     # "Classroom",
     
-    # Communication folder app manafement Communication bewteen teacher and student and other related functions
+ 
     "Communication",
     
-    # Attendance folder app management Attendance and other related functions
+
     # "Attendance",
     
-    #  Notifications folder app Notifications managemnt and other related functions
+
     "Notifications",
     
-    # Reporting  folder app management Reporting techer and student and other related functions
+
     # "Reporting",
 
-    # DocumentManagement Management student and teacher document and other related functions
     # "DocumentManagement",
-    # Rewards folder app management trophies and other related functions
+
     # "Rewards",
 ]
 
@@ -146,6 +145,38 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     },
+    'Home': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'Home.sqlite3',
+    },
+    'Bank':{
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'Bank.sqlite3',
+    },
+    'Teacher':{
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'Teacher.sqlite3',
+    },
+    'Student':{
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'Student.sqlite3',
+    },
+    'API':{
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'API.sqlite3',
+    },
+    'Education':{
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'Education.sqlite3',
+    },
+    'Communication':{
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'Communication.sqlite3',        
+    },
+    "Notifications":{
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'Notifications.sqlite3',        
+    }
 
 }
 
