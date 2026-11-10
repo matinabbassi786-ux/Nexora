@@ -235,7 +235,7 @@ class Basic_Identification_Details(models.Model):
         ('O+','O+'),
         ('AB+','AB+'),
     )
-    User = models.OneToOneField(User,on_delete=models.CASCADE)
+    Users = models.OneToOneField(User,on_delete=models.CASCADE)
     Date_of_Birth = models.DateField()
     Country = models.CharField(max_length=255)
     state = models.CharField(max_length=255)
@@ -257,7 +257,7 @@ class Basic_Identification_Details(models.Model):
 
     Industrys = models.ManyToManyField(Industry)
     Fields = models.ManyToManyField(Field)
-    Subject = models.ManyToManyField(Subject)
+    Subjects = models.ManyToManyField(Subject)
 
 
 
