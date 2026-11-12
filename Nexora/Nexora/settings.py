@@ -45,6 +45,8 @@ ALLOWED_HOSTS = [
 # Application definition
 
 INSTALLED_APPS = [
+     "daphne",
+    "channels",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -106,6 +108,23 @@ INSTALLED_APPS = [
     # "Rewards",
 ]
 
+ASGI_APPLICATION = "Nexora.asgi.application"
+
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [
+                {
+                    "address": "redis://127.0.0.1:6379/0",
+                    "socket_timeout": None,
+                }
+            ],
+        },
+    },
+}
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -119,6 +138,8 @@ MIDDLEWARE = [
     "Nexora.middleware.ZstdResponseMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    'django.middleware.security.SecurityMiddleware',
+'django.contrib.sessions.middleware.SessionMiddleware',
 
 ]
 
@@ -151,9 +172,6 @@ DATABASES = {
         "NAME": BASE_DIR / "Nexora_unified.sqlite3",
     }
 }
-DATABASE_ROUTERS = [
-    "Nexora.routers.AppDatabaseRouter",
-]
 
 # Password validation
 # https://docs.djangoproject.com/en/6.1/ref/settings/#auth-password-validators
