@@ -9,8 +9,8 @@ def authenticated(request):
         if request.user.is_authenticated:
             print("Yes is login")
         else:
-            print("NO is login")
-            pass
+            return redirect("Login")
+
             # return redirect('/login/')
     except:
         pass
