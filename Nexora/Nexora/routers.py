@@ -1,31 +1,23 @@
-class AppDatabaseRouter:
 
-    app_databases = {
-        "API": "api",
-        "Home": "Home",
-        "Student": "Student",
-        "Teacher": "Teacher",
-        "Notifications": "Notifications",
-        "Communication": "Communication",
-        "Education": "Education",
-        "Bank": "Bank",
-    }
+class AppDatabaseRouter:
+    """
+    All related Nexora Django models use one database.
+
+    This allows normal ForeignKey, OneToOneField
+    and ManyToManyField relationships between apps.
+    """
 
     def db_for_read(self, model, **hints):
-        return self.app_databases.get(
-            model._meta.app_label,
-            "default"
-        )
+        return "default"
 
     def db_for_write(self, model, **hints):
-        return self.app_databases.get(
-            model._meta.app_label,
-            "default"
-        )
+        return "default"
 
     def allow_relation(self, obj1, obj2, **hints):
-        return obj1._state.db == obj2._state.db
+        return (
+            obj1._state.db == "default"
+            and obj2._state.db == "default"
+        )
 
     def allow_migrate(self, db, app_label, model_name=None, **hints):
-        target_db = self.app_databases.get(app_label, "default")
-        return db == target_db
+        return db == "default"

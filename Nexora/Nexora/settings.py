@@ -55,6 +55,7 @@ INSTALLED_APPS = [
      "debug_toolbar",
 
       "rest_framework",
+      "django_http_compression",
 
      "Bank",
 
@@ -115,6 +116,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
       "debug_toolbar.middleware.DebugToolbarMiddleware",
 
+    "Nexora.middleware.ZstdResponseMiddleware",
+    "django.middleware.security.SecurityMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+
 ]
 
 ROOT_URLCONF = 'Nexora.urls'
@@ -141,48 +146,15 @@ WSGI_APPLICATION = 'Nexora.wsgi.application'
 # https://docs.djangoproject.com/en/6.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    },
-    'Home': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'Home.sqlite3',
-    },
-    'Bank':{
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'Bank.sqlite3',
-    },
-    'Teacher':{
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'Teacher.sqlite3',
-    },
-    'Student':{
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'Student.sqlite3',
-    },
-    'API':{
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'API.sqlite3',
-    },
-    'Education':{
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'Education.sqlite3',
-    },
-    'Communication':{
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'Communication.sqlite3',        
-    },
-    "Notifications":{
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'Notifications.sqlite3',        
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "Nexora_unified.sqlite3",
     }
-
 }
-
 DATABASE_ROUTERS = [
     "Nexora.routers.AppDatabaseRouter",
 ]
+
 # Password validation
 # https://docs.djangoproject.com/en/6.1/ref/settings/#auth-password-validators
 
@@ -266,9 +238,12 @@ CACHES = {
             # Optional: Configure timeouts
             "SOCKET_CONNECT_TIMEOUT": 5,
             "SOCKET_TIMEOUT": 5,
+             
         }
     }
 }
+
+
 
 CELERY_BEAT_SCHEDULE = {
     'clear-expired-sessions-every-hour': {
