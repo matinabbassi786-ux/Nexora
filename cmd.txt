@@ -1,1 +1,3 @@
 celery -A Nexora worker --loglevel=info
+
+python -m daphne -b 127.0.0.1 -p 8000 Nexora.asgi:application

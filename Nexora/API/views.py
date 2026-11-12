@@ -9,19 +9,24 @@ from datetime import datetime, timedelta
 from rest_framework import status
 from .Optimization import native
 
+from Nexora.realtime.services import broadcast_test_event
 
-@api_view()
+
+
+@api_view(["GET"])
 def index(request):
-    # if  User_authenticated.authenticated(request):
-    #     return  User_authenticated.authenticated(request)  
-    data = "Hello Nexora! This is a compression test. " * 20000
-    return HttpResponse(
-        data,
-        content_type="text/plain"
-    )
+   
+    broadcast_test_event("Hello from Django API")
 
+    Data = {
+        "status": "success",
+        "message": "API executed successfully",
+    }
     Data ={}
     return Response(Data)
+
+
+
 
 
 @api_view(['GET', 'POST'])

@@ -32,13 +32,15 @@ def test(request):
         </html>
         """
     )
-
+from Nexora.realtime.views import websocket_test_page, websocket_test
 
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     # path("", test, name="test"),
     path("",include("API.urls")),
+    path("ws-test/", websocket_test_page, name="websocket_test_page"),
+    path("websocket-test/", websocket_test, name="websocket_test"),
 
    
 ]
